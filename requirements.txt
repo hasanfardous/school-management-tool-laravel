@@ -1,0 +1,17 @@
+================
+Mr. Noman Ahmed has a school and want to automation for the school.
+
+He needs a school management system to manage his school. The following feature needs to be present in the system.
+
+1) Users = Admin, Teacher, Parent [Role & Permissions Management]
+
+2) Admin can add/edit/delete teacher, parent, and student. Also class. He can also assign role and permissions to other teacher and parent
+
+3) The teacher can add the attendance of the students for specific class.
+
+4) The parent can view his son/daughter's profile, fees and attendances.
+
+5) Admin can generate class wise and teacher wise report of attendance monthly and download the report.
+
+5) Student can pay his fees online [Do dummy payment]. Also can view his class routine and attendance
+================
