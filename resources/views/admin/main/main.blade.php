@@ -74,7 +74,6 @@
                             <span class="label {{ $user->status == 0 ? 'label-warning' : 'label-success' }}">{{ $user->status == 0 ? 'Pending' : 'Approved' }}</span>
                         </td>
                         <td class="text-right">
-                            <a href="{{ route('view-user', ['id' => $user->id]) }}" target="_blank"><span class="label label-info">View</span></a>
                             <a href="{{ route('edit-user', ['id' => $user->id]) }}"><span class="label label-warning">Edit</span></a>
                             <a href="{{ route('delete-user', ['id' => $user->id]) }}"><span class="label label-danger" onclick="return confirm('Are you sure, to delete this item?')">Delete</span></a>
                         </td>

@@ -46,16 +46,6 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        // $user = new User();
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-        // $user->password = bcrypt('secret');
-        // $user->save();
-        // $user = $user->id;
-
-        // // Assigning user role
-        // $user->assignRole($request->user_role);f
-
         $input = $request->all();
         $input['password'] = bcrypt('secret');
         $user = User::create($input);
@@ -120,6 +110,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect('/users/all')->with('success', 'User has been deleted.');
     }
 }

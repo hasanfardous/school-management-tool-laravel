@@ -86,10 +86,16 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
+        $role = Role::find($id);
         $permissions = Permission::get();
-
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
+            ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
+            ->all();
+            
         return view('admin.roles.edit', [
-            'permissions' => $permissions
+            'role' => $role,
+            'permissions' => $permissions,
+            'rolePermissions' => $rolePermissions,
         ]);
     }
 
@@ -102,15 +108,17 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $this->validate($request, [
-        //     'role_name' => 'required|unique:roles,name',
-        //     'user_permissions' => 'required',
-        // ]);
+        $this->validate($request, [
+            'role_name' => 'required',
+            'user_permissions' => 'required',
+        ]);
 
-        // $role = Role::create(['name' => $request->role_name]);
-        // $role->syncPermissions($request->user_permissions);
+        $role = Role::find($id);
+        $role->name = $request->input('role_name');
+        $role->save();
+        $role->syncPermissions($request->input('user_permissions'));
 
-        // return redirect('/users/roles/all')->with('success', 'Role has been updated with permissions.');
+        return redirect('/users/roles/all')->with('success', 'Role has been updated with permissions.');
     }
 
     /**
@@ -121,6 +129,8 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table("roles")->where('id',$id)->delete();
+
+        return redirect('/users/roles/all')->with('success', 'Role has been Deleted.');
     }
 }

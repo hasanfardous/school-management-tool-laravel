@@ -37,10 +37,10 @@
     <!-- /. tools -->
   </div>
   <div class="box-body">
-    <form method="POST" action="{{ route('update-role', ['']) }}">
+    <form method="POST" action="{{ route('update-role', ['id' => $role->id]) }}">
         @csrf
       <div class="form-group">
-        <input type="text" class="form-control" name="role_name" placeholder="Role Name">
+        <input type="text" value="{{$role->name}}" class="form-control" name="role_name" placeholder="Role Name">
         <p class="help-block">Ex. Teacher, Parent, Student</p>
       </div>
 
@@ -48,7 +48,7 @@
         @foreach($permissions as $permission)
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="{{$permission->name}}" name="user_permissions[]">
+            <input type="checkbox" value="{{$permission->name}}" name="user_permissions[]" {{in_array($permission->id, $rolePermissions) ? 'checked' : ''}}>
             {{$permission->name}}
           </label>
         </div>
